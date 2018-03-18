@@ -2,19 +2,16 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { ConsoleProvider, Cadconsole } from '../../providers/console/console';
 
-
 @IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'page-consoles',
+  templateUrl: 'consoles.html',
 })
-export class HomePage {
+export class ConsolesPage {
   consoles: any[] = [];
-  onlyInactives: boolean = false;
   searchText: string = null;
 
-  constructor(public navCtrl: NavController, private toast: ToastController, private consoleProvider: ConsoleProvider) {
-  }
+  constructor(public navCtrl: NavController, private toast: ToastController, private consoleProvider: ConsoleProvider) { }
 
   ionViewDidEnter() {
     this.getAllConsoles();
@@ -48,5 +45,4 @@ export class HomePage {
   filterConsoles(ev: any) {
     this.getAllConsoles();
   }
-
 }

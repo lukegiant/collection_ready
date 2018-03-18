@@ -1,0 +1,50 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cadastrar Acessório</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+
+        <ion-item>
+          <ion-label stacked>Nome</ion-label>
+          <ion-input type="text" name="ace_nome" [(ngModel)]="model.ace_nome"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label stacked>Fabricante</ion-label>
+          <ion-input type="text" name="ace_fabri" [(ngModel)]="model.ace_fabri"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label stacked>Data de Lançamento</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" name="ace_duedate" [(ngModel)]="model.ace_duedate"></ion-datetime>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label stacked>Tipo</ion-label>
+          <ion-select name="tipo_id" [(ngModel)]="model.tipo_id">
+            <ion-option *ngFor="let tipos of tipo" value="{{ tipo.id }}">{{ tipos.tipo_nome }}</ion-option>
+          </ion-select>
+        </ion-item>
+    
+        <ion-item>
+            <ion-label stacked>Plataforma</ion-label>
+            <ion-input type="text" name="ace_plat" [(ngModel)]="model.ace_plat"></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label stacked>Descrição</ion-label>
+              <ion-input type="text" name="ace_desc" [(ngModel)]="model.ace_desc"></ion-input>
+            </ion-item>
+    
+      </ion-list>
+    
+      <button ion-button block (click)="save()">Salvar</button>
+
+</ion-content>

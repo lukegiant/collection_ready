@@ -1,0 +1,70 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cadastrar Jogo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Nome</ion-label>
+      <ion-input type="text" name="jog_nome" [(ngModel)]="model.jog_nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Desenvolvedora</ion-label>
+      <ion-input type="text" name="jog_desen" [(ngModel)]="model.jog_desen"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Distribuidora</ion-label>
+      <ion-input type="text" name="jog_dist" [(ngModel)]="model.jog_dist"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Data de Lançamento</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" name="jog_duedate" [(ngModel)]="model.jog_duedate"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Plataforma</ion-label>
+      <ion-input type="text" name="jog_plat" [(ngModel)]="model.jog_plat"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Midia</ion-label>
+      <ion-select name="midia_id" [(ngModel)]="model.midia_id">
+        <ion-option *ngFor="let midias of midia" value="{{ midias.id }}">{{ midias.midia_nome }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Versão</ion-label>
+        <ion-select name="versao_id" [(ngModel)]="model.versao_id">
+          <ion-option *ngFor="let versoes of versao" value="{{ versoes.id }}">{{ versoes.versao_nome }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+          <ion-label stacked>Gênero</ion-label>
+          <ion-select name="genero_id" [(ngModel)]="model.genero_id">
+            <ion-option *ngFor="let generos of genero" value="{{ generos.id }}">{{ generos.genero_nome }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Região</ion-label>
+          <ion-select name="regiao_id" [(ngModel)]="model.regiao_id">
+            <ion-option *ngFor="let regioes of regiao" value="{{ regioes.id }}">{{ regioes.regiao_nome }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+  </ion-list>
+
+  <button ion-button block (click)="save()">Salvar</button>
+
+</ion-content>

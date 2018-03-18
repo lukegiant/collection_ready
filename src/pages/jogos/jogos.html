@@ -1,0 +1,38 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Jogos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-searchbar (ionInput)="filterJogos($event)" [(ngModel)]="searchText"></ion-searchbar>
+    <ion-list>
+        <ion-item-sliding *ngFor="let jogo of jogos">
+     
+          <button ion-item (click)="editJogos(jogo.id)">
+            <h1>{{ jogo.jog_nome }}</h1>
+            <h2>{{ jogo.jog_desen }}</h2>
+            <h2>{{ jogo.jog_dist }}</h2>
+            <h2>{{ jogo.jog_duedate }}</h2>
+            <h2>{{ jogo.jog_plat }}</h2>
+          </button>
+     
+          <ion-item-options side="left">
+            <button ion-button color="danger" (click)="removeJogos(jogo)">
+              <ion-icon name="trash"></ion-icon>
+              Excluir
+            </button>
+          </ion-item-options>
+     
+        </ion-item-sliding>
+      </ion-list>
+  
+      <ion-fab right bottom>
+          <button ion-fab color="light" (click)="addJogos()"><ion-icon name="add"></ion-icon></button>
+        </ion-fab>
+
+</ion-content>

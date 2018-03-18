@@ -1,0 +1,38 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Acessórios</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-searchbar (ionInput)="filterAcessorios($event)" [(ngModel)]="searchText"></ion-searchbar>
+    <ion-list>
+        <ion-item-sliding *ngFor="let acessorio of acessorios">
+     
+          <button ion-item (click)="editAcessorio(acessorio.id)">
+            <h1>{{ acessorio.ace_nome }}</h1>
+            <h2>{{ acessorio.ace_fabri }}</h2>
+            <h2>{{ acessorio.ace_duedate }}</h2>
+            <h2>{{ acessorio.ace_plat }}</h2>
+          </button>
+     
+          <ion-item-options side="left">
+            <button ion-button color="danger" (click)="removeAcessorio(acessorio)">
+              <ion-icon name="trash"></ion-icon>
+              Excluir
+            </button>
+          </ion-item-options>
+     
+        </ion-item-sliding>
+      </ion-list>
+  
+      <ion-fab right bottom>
+          <button ion-fab color="light" (click)="addAcessorio()"><ion-icon name="add"></ion-icon></button>
+        </ion-fab>
+
+</ion-content>
