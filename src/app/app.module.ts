@@ -17,6 +17,7 @@ import { AcessorioProvider } from '../providers/acessorio/acessorio';
 import { RegiaoProvider } from '../providers/regiao/regiao';
 import { TipoProvider } from '../providers/tipo/tipo';
 import { TipoConsoleProvider } from '../providers/tipo-console/tipo-console';
+import { PlataformaProvider } from '../providers/plataforma/plataforma';
  
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TipoConsoleProvider } from '../providers/tipo-console/tipo-console';
     AcessorioProvider,
     RegiaoProvider,
     TipoProvider,
-    TipoConsoleProvider
+    TipoConsoleProvider,
+    PlataformaProvider
   ]
 })
 export class AppModule {}

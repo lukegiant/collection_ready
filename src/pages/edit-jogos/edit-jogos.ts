@@ -5,6 +5,7 @@ import { MidiaProvider } from '../../providers/midia/midia';
 import { VersaoProvider } from '../../providers/versao/versao';
 import { GeneroProvider } from '../../providers/genero/genero';
 import { RegiaoProvider } from '../../providers/regiao/regiao';
+import { PlataformaProvider } from '../../providers/plataforma/plataforma';
 
 @IonicPage()
 @Component({
@@ -13,6 +14,7 @@ import { RegiaoProvider } from '../../providers/regiao/regiao';
 })
 export class EditJogosPage {
   model: Cadjogo;
+  plataforma: any[];
   midia: any[];
   versao: any[];
   genero: any[];
@@ -21,7 +23,8 @@ export class EditJogosPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, private jogosProvider: JogosProvider,
     private midiaProvider: MidiaProvider, private versaoProvider: VersaoProvider, 
-    private generoProvider: GeneroProvider, private regiaoProvider: RegiaoProvider) {
+    private generoProvider: GeneroProvider, private regiaoProvider: RegiaoProvider, 
+    private plataformaProvider: PlataformaProvider) {
 
     this.model = new Cadjogo();
 
@@ -34,6 +37,15 @@ export class EditJogosPage {
   }
 
   ionViewDidLoad() {
+
+    this.plataformaProvider.getAll()
+    .then((result: any[]) => {
+      this.plataforma = result;
+    })
+    .catch(() => {
+      this.toast.create({ message: 'Erro ao carregar as plataformas', duration: 3000, position: 'botton' }).present();
+    });
+
     this.midiaProvider.getAll()
       .then((result: any[]) => {
         this.midia = result;

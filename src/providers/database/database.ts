@@ -46,6 +46,7 @@ export class DatabaseProvider {
       ['CREATE TABLE IF NOT EXISTS tipo (id integer primary key AUTOINCREMENT NOT NULL, tipo_nome TEXT)'],
       ['CREATE TABLE IF NOT EXISTS regiao (id integer primary key AUTOINCREMENT NOT NULL, regiao_nome TEXT)'],
       ['CREATE TABLE IF NOT EXISTS tipo_console (id integer primary key AUTOINCREMENT NOT NULL, tipo_console_nome TEXT)'],
+      ['CREATE TABLE IF NOT EXISTS plataforma (id integer primary key AUTOINCREMENT NOT NULL, plataforma_nome TEXT)'],
       //br
       ['CREATE TABLE IF NOT EXISTS consoles (id integer primary key AUTOINCREMENT NOT NULL,' +  
       'con_nome TEXT,' + 
@@ -62,20 +63,22 @@ export class DatabaseProvider {
       'ace_fabri TEXT,' + 
       'ace_duedate DATE,' + 
       'tipo_id integer,' + 
-      'ace_plat TEXT,' + 
+      'plataforma_id integer,' + 
       'ace_desc TEXT,' + 
-      'FOREIGN KEY(tipo_id) REFERENCES tipo(id))'],
+      'FOREIGN KEY(tipo_id) REFERENCES tipo(id),' + 
+      'FOREIGN KEY(plataforma_id) REFERENCES plataforma(id))'],
       //br
       ['CREATE TABLE IF NOT EXISTS jogos (id integer primary key AUTOINCREMENT NOT NULL,' + 
       'jog_nome TEXT,' + 
       'jog_desen TEXT,' + 
       'jog_dist TEXT,' +
       'jog_duedate DATE,' + 
-      'jog_plat TEXT,' + 
+      'plataforma_id integer,' + 
       'midia_id integer,' + 
       'versao_id integer,' + 
       'genero_id integer,' + 
       'regiao_id integer,' +
+      'FOREIGN KEY(plataforma_id) REFERENCES plataforma(id),' + 
       'FOREIGN KEY(midia_id) REFERENCES midia(id),' + 
       'FOREIGN KEY(versao_id) REFERENCES versao(id),' + 
       'FOREIGN KEY(genero_id) REFERENCES genero(id),' + 
@@ -209,6 +212,81 @@ export class DatabaseProvider {
             ['insert into tipo_console (tipo_console_nome) values (?)', ['Console Portátil']],
             ['insert into tipo_console (tipo_console_nome) values (?)', ['Computador']],
             ['insert into tipo_console (tipo_console_nome) values (?)', ['Arcade']]
+          ])
+            .then(() => console.log('Dados padrões incluídos'))
+            .catch(e => console.error('Erro ao incluir dados padrões', e));
+
+        }
+      })
+
+      db.executeSql('select COUNT(id) as qtd from plataforma', {})
+      .then((data: any) => {
+        //Se não existe nenhum registro
+        if (data.rows.item(0).qtd == 0) {
+
+          // Criando as tabelas
+          db.sqlBatch([
+            ['insert into plataforma (plataforma_nome) values (?)', ['3DO']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Amiga']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Android']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Aple II']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Arcade']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Atari 2600']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Atari 5200']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Atari 7800']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Atari 800']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Atari Jaguar']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Atari Lynx']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['ColecoVision']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Comodore 128']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Comodore 64']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Comodore VIC-20']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Dreamcast']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Famicom Disk System']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Game & Watch']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Game Gear']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['GameCube']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Game Boy']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Game Boy Color']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Game Boy Advance']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Genesis/Megadrive']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Intellivision']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['iOS']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['MAC']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['MSX']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['N-Gage']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Nintendo 64']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Nintendo DS']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Nintendo 3DS']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['NES']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Super Nintendo']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Nintendo Wii']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Nintendo Switch']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Neo Geo']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Neo Geo CD']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Odyssey']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Ouya']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['PC']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Philips CD-i']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Ps Vita']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Playstation']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Playstation 2']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Playstation 3']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Playstation 4']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Psn']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['PSP']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Sega 32x']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Sega CD']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Sega Master System']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Sega Saturn']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Sega SG-1000']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['TurboGrafx 16']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['TurboGrafx CD']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Virtual Boy']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Wii U']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Xbox']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Xbox 360']],
+            ['insert into plataforma (plataforma_nome) values (?)', ['Xbox One']]
           ])
             .then(() => console.log('Dados padrões incluídos'))
             .catch(e => console.error('Erro ao incluir dados padrões', e));

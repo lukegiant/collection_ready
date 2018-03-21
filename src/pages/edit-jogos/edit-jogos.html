@@ -32,7 +32,9 @@
 
     <ion-item>
       <ion-label stacked>Plataforma</ion-label>
-      <ion-input type="text" name="jog_plat" [(ngModel)]="model.jog_plat"></ion-input>
+      <ion-select name="plataforma_id" [(ngModel)]="model.plataforma_id">
+        <ion-option *ngFor="let plataformas of plataforma" value="{{ plataformas.id }}">{{ plataformas.plataforma_nome }}</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>

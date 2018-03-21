@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Cadace, AcessorioProvider } from '../../providers/acessorio/acessorio';
 import { TipoProvider } from '../../providers/tipo/tipo';
+import { PlataformaProvider } from '../../providers/plataforma/plataforma';
 
 
 @IonicPage()
@@ -12,10 +13,11 @@ import { TipoProvider } from '../../providers/tipo/tipo';
 export class EditAcessoriosPage {
   model: Cadace;
   tipo: any[];
-
+  plataforma: any[];
+ 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, private acessorioProvider: AcessorioProvider,
-    private tipoProvider: TipoProvider) { 
+    private tipoProvider: TipoProvider, private plataformaProvider: PlataformaProvider) { 
 
       this.model = new Cadace();
 
@@ -34,6 +36,14 @@ export class EditAcessoriosPage {
       })
       .catch(() => {
         this.toast.create({ message: 'Erro ao carregar os tipos', duration: 3000, position: 'botton' }).present();
+      });
+
+      this.plataformaProvider.getAll()
+      .then((result: any[]) => {
+        this.plataforma = result;
+      })
+      .catch(() => {
+        this.toast.create({ message: 'Erro ao carregar as plataformas', duration: 3000, position: 'botton' }).present();
       });
   }
 

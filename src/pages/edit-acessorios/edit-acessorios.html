@@ -29,14 +29,16 @@
         <ion-item>
           <ion-label stacked>Tipo</ion-label>
           <ion-select name="tipo_id" [(ngModel)]="model.tipo_id">
-            <ion-option *ngFor="let tipos of tipo" value="{{ tipo.id }}">{{ tipos.tipo_nome }}</ion-option>
+            <ion-option *ngFor="let tipos of tipo" value="{{ tipos.id }}">{{ tipos.tipo_nome }}</ion-option>
           </ion-select>
         </ion-item>
-    
+     
         <ion-item>
-            <ion-label stacked>Plataforma</ion-label>
-            <ion-input type="text" name="ace_plat" [(ngModel)]="model.ace_plat"></ion-input>
-          </ion-item>
+          <ion-label stacked>Plataforma</ion-label>
+          <ion-select name="plataforma_id" [(ngModel)]="model.plataforma_id">
+            <ion-option *ngFor="let plataformas of plataforma" value="{{ plataformas.id }}">{{ plataformas.plataforma_nome }}</ion-option>
+          </ion-select>
+        </ion-item>
 
           <ion-item>
               <ion-label stacked>Descrição</ion-label>

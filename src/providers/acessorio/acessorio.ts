@@ -11,8 +11,8 @@ export class AcessorioProvider {
   public insert(cadace: Cadace) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into acessorios (ace_nome, ace_fabri, ace_duedate, tipo_id, ace_plat, ace_desc) values (?, ?, ?, ?, ?, ?)';
-        let data = [cadace.ace_nome, cadace.ace_fabri, cadace.ace_duedate, cadace.tipo_id, cadace.ace_plat, cadace.ace_desc];
+        let sql = 'insert into acessorios (ace_nome, ace_fabri, ace_duedate, tipo_id, plataforma_id, ace_desc) values (?, ?, ?, ?, ?, ?)';
+        let data = [cadace.ace_nome, cadace.ace_fabri, cadace.ace_duedate, cadace.tipo_id, cadace.plataforma_id, cadace.ace_desc];
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
@@ -22,8 +22,8 @@ export class AcessorioProvider {
   public update(cadace: Cadace) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'update acessorios set ace_nome = ?, ace_fabri = ?, ace_duedate = ?, tipo_id = ?, ace_plat = ?, ace_desc = ? where id = ?';
-        let data = [cadace.ace_nome, cadace.ace_fabri, cadace.ace_duedate, cadace.tipo_id, cadace.ace_plat, cadace.ace_desc, cadace.id];
+        let sql = 'update acessorios set ace_nome = ?, ace_fabri = ?, ace_duedate = ?, tipo_id = ?, plataforma_id = ?, ace_desc = ? where id = ?';
+        let data = [cadace.ace_nome, cadace.ace_fabri, cadace.ace_duedate, cadace.tipo_id, cadace.plataforma_id, cadace.ace_desc, cadace.id];
  
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
@@ -59,7 +59,7 @@ export class AcessorioProvider {
               cadace.ace_fabri = item.ace_fabri;
               cadace.ace_duedate = item.ace_duedate;
               cadace.tipo_id = item.tipo_id;
-              cadace.ace_plat = item.ace_plat;
+              cadace.plataforma_id = item.plataforma_id;
               cadace.ace_desc = item.ace_desc;
  
               return cadace;
@@ -75,24 +75,24 @@ export class AcessorioProvider {
   public getAll(ace_nome: string = null) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'SELECT * from acessorios';
+        let sql = 'SELECT a.*, p.plataforma_nome as plataforma_nome from acessorios a inner join plataforma p on a.plataforma_id = p.id';
         var data: any[] = [];
  
         // filtrando pelo nome
         if (ace_nome) {
           sql += ' and ace_nome like ?'
           data.push('%' + ace_nome + '%');
-        }
+        } 
  
         return db.executeSql(sql, data)
           .then((data: any) => {
             if (data.rows.length > 0) {
-              let aces: any[] = [];
+              let acessorios: any[] = [];
               for (var i = 0; i < data.rows.length; i++) {
-                var acessorio = data.rows.item(i);
-                aces.push(acessorio);
+                var acess = data.rows.item(i);
+                acessorios.push(acess);
               }
-              return aces;
+              return acessorios;
             } else {
               return [];
             }
@@ -109,7 +109,7 @@ export class Cadace {
   ace_fabri: string;
   ace_duedate: Date;
   tipo_id: number;
-  ace_plat: string;
+  plataforma_id: number;
   ace_desc: string
 
 

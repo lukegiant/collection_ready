@@ -10,8 +10,8 @@ export class JogosProvider {
   public insert(cadjogo: Cadjogo) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into jogos (jog_nome, jog_desen, jog_dist, jog_duedate, jog_plat, midia_id, versao_id, genero_id, regiao_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.jog_plat, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id];
+        let sql = 'insert into jogos (jog_nome, jog_desen, jog_dist, jog_duedate, plataforma_id, midia_id, versao_id, genero_id, regiao_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id];
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
@@ -21,8 +21,8 @@ export class JogosProvider {
   public update(cadjogo: Cadjogo) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'update jogos set jog_nome = ?, jog_desen = ?, jog_dist = ?, jog_duedate = ?, jog_plat = ?, midia_id = ?, versao_id = ?, genero_id = ?, regiao_id = ? where id = ?';
-        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.jog_plat, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id, cadjogo.id];
+        let sql = 'update jogos set jog_nome = ?, jog_desen = ?, jog_dist = ?, jog_duedate = ?, plataforma_id = ?, midia_id = ?, versao_id = ?, genero_id = ?, regiao_id = ? where id = ?';
+        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id, cadjogo.id];
 
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
@@ -58,7 +58,7 @@ export class JogosProvider {
               cadjogo.jog_desen = item.jog_desen;
               cadjogo.jog_dist = item.jog_dist;
               cadjogo.jog_duedate = item.jog_duedate;
-              cadjogo.jog_plat = item.jog_plat;
+              cadjogo.plataforma_id = item.plataforma_id;
               cadjogo.midia_id = item.midia_id;
               cadjogo.versao_id = item.versao_id;
               cadjogo.genero_id = item.genero_id;
@@ -77,15 +77,15 @@ export class JogosProvider {
   public getAll(jog_nome: string = null) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'SELECT * from jogos';
+        let sql = 'SELECT j.*, p.plataforma_nome as plataforma_nome from jogos j inner join plataforma p on j.plataforma_id = p.id';
         var data: any[] = [];
-
+ 
         // filtrando pelo nome
         if (jog_nome) {
           sql += ' and jog_nome like ?'
           data.push('%' + jog_nome + '%');
-        }
-
+        } 
+ 
         return db.executeSql(sql, data)
           .then((data: any) => {
             if (data.rows.length > 0) {
@@ -111,7 +111,7 @@ export class Cadjogo {
   jog_desen: string;
   jog_dist: string;
   jog_duedate: Date;
-  jog_plat: string;
+  plataforma_id: number;
   midia_id: number;
   versao_id: number;
   genero_id: number;

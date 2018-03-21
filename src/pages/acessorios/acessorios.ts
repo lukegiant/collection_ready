@@ -46,5 +46,5 @@ export class AcessoriosPage {
   filterAcessorios(ev: any) {
     this.getAllAcessorios();
   }
-
+ 
 }

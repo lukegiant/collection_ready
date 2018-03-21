@@ -81,7 +81,7 @@ export class ConsoleProvider {
         if (con_nome) {
           sql += ' and con_nome like ?'
           data.push('%' + con_nome + '%');
-        }
+        } 
  
         return db.executeSql(sql, data)
           .then((data: any) => {
