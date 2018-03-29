@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, AlertController } from 'ionic-angular';
 import { ConsoleProvider, Cadconsole } from '../../providers/console/console';
 
 @IonicPage()
@@ -11,7 +11,8 @@ export class ConsolesPage {
   consoles: any[] = [];
   searchText: string = null;
 
-  constructor(public navCtrl: NavController, private toast: ToastController, private consoleProvider: ConsoleProvider) { }
+  constructor(public navCtrl: NavController, private toast: ToastController,
+    private consoleProvider: ConsoleProvider, private alertCtrl: AlertController) { }
 
   ionViewDidEnter() {
     this.getAllConsoles();
@@ -32,15 +33,40 @@ export class ConsolesPage {
     this.navCtrl.push('EditConsolePage', { id: id });
   }
 
-  removeConsole(console: Cadconsole) {
-    this.consoleProvider.remove(console.id)
-      .then(() => {
-        // Removendo do array de consoles
-        var index = this.consoles.indexOf(console);
-        this.consoles.splice(index, 1);
-        this.toast.create({ message: 'Item removido.', duration: 3000, position: 'botton' }).present();
-      })
+  presentConfirm(console: Cadconsole) {
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar',
+      message: 'Deseja realmente deletar este item?',
+      buttons: [
+        {
+          text: 'Cancelar',
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.consoleProvider.remove(console.id)
+              .then(() => {
+                // Removendo do array de consoles
+                var index = this.consoles.indexOf(console);
+                this.consoles.splice(index, 1);
+                this.toast.create({ message: 'Item removido.', duration: 3000, position: 'botton' }).present();
+              })
+          }
+        }
+      ]
+    });
+    alert.present();
   }
+
+  /* removeConsole(console: Cadconsole) {
+     this.consoleProvider.remove(console.id)
+       .then(() => {
+         // Removendo do array de consoles
+         var index = this.consoles.indexOf(console);
+         this.consoles.splice(index, 1);
+         this.toast.create({ message: 'Item removido.', duration: 3000, position: 'botton' }).present();
+       })
+   } */
 
   filterConsoles(ev: any) {
     this.getAllConsoles();

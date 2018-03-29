@@ -74,7 +74,7 @@ export class ConsoleProvider {
   public getAll(con_nome: string = null) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'SELECT c.*, t.tipo_console_nome as tipo_console_nome FROM consoles c inner join tipo_console t on c.tipo_console_id = t.id';
+        let sql = 'SELECT c.*, t.tipo_console_nome as tipo_console_nome FROM consoles c inner join tipo_console t on c.tipo_console_id = t.id ORDER BY id DESC';
         var data: any[] = [];
  
         // filtrando pelo nome

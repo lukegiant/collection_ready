@@ -77,7 +77,7 @@ export class JogosProvider {
   public getAll(jog_nome: string = null) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'SELECT j.*, p.plataforma_nome as plataforma_nome from jogos j inner join plataforma p on j.plataforma_id = p.id';
+        let sql = 'SELECT j.*, p.plataforma_nome as plataforma_nome from jogos j inner join plataforma p on j.plataforma_id = p.id ORDER BY id DESC';
         var data: any[] = [];
  
         // filtrando pelo nome

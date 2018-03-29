@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { ConsoleProvider, Cadconsole } from '../../providers/console/console';
+import { HomeProvider } from '../../providers/home/home';
 
 
 @IonicPage()
@@ -9,44 +9,21 @@ import { ConsoleProvider, Cadconsole } from '../../providers/console/console';
   templateUrl: 'home.html',
 })
 export class HomePage {
-  consoles: any[] = [];
-  onlyInactives: boolean = false;
+  itens: any[] = [];
   searchText: string = null;
 
-  constructor(public navCtrl: NavController, private toast: ToastController, private consoleProvider: ConsoleProvider) {
+  constructor(public navCtrl: NavController, private toast: ToastController, private homeProvider: HomeProvider) {
   }
 
   ionViewDidEnter() {
-    this.getAllConsoles();
+    this.getAllItens();
   }
 
-  getAllConsoles() {
-    this.consoleProvider.getAll(this.searchText)
+  getAllItens() {
+    this.homeProvider.getAllItens(this.searchText)
       .then((result: any[]) => {
-        this.consoles = result;
+        this.itens = result;
       });
-  }
-
-  addConsole() {
-    this.navCtrl.push('EditConsolePage');
-  }
-
-  editConsole(id: number) {
-    this.navCtrl.push('EditConsolePage', { id: id });
-  }
-
-  removeConsole(console: Cadconsole) {
-    this.consoleProvider.remove(console.id)
-      .then(() => {
-        // Removendo do array de consoles
-        var index = this.consoles.indexOf(console);
-        this.consoles.splice(index, 1);
-        this.toast.create({ message: 'Item removido.', duration: 3000, position: 'botton' }).present();
-      })
-  }
-
-  filterConsoles(ev: any) {
-    this.getAllConsoles();
   }
 
 }

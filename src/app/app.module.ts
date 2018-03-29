@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, AlertController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
@@ -18,6 +18,7 @@ import { RegiaoProvider } from '../providers/regiao/regiao';
 import { TipoProvider } from '../providers/tipo/tipo';
 import { TipoConsoleProvider } from '../providers/tipo-console/tipo-console';
 import { PlataformaProvider } from '../providers/plataforma/plataforma';
+import { HomeProvider } from '../providers/home/home';
  
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { PlataformaProvider } from '../providers/plataforma/plataforma';
     RegiaoProvider,
     TipoProvider,
     TipoConsoleProvider,
-    PlataformaProvider
+    PlataformaProvider,
+    HomeProvider
   ]
 })
 export class AppModule {}

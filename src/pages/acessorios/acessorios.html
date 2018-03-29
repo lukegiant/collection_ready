@@ -1,8 +1,8 @@
 
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Acessórios</ion-title>
+  <ion-navbar color='verdeok'>
+    <ion-title text-center>Acessórios</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,7 +22,7 @@
           </button>
      
           <ion-item-options side="left">
-            <button ion-button color="danger" (click)="removeAcessorio(acessorio)">
+            <button ion-button color="danger" (click)="presentConfirm(acessorio)">
               <ion-icon name="trash"></ion-icon>
               Excluir
             </button>
@@ -32,7 +32,7 @@
       </ion-list>
   
       <ion-fab right bottom>
-          <button ion-fab color="light" (click)="addAcessorio()"><ion-icon name="add"></ion-icon></button>
+          <button ion-fab color="twitter" (click)="addAcessorio()"><ion-icon name="add"></ion-icon></button>
         </ion-fab>
 
 </ion-content>

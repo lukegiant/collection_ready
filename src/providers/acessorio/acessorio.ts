@@ -75,7 +75,7 @@ export class AcessorioProvider {
   public getAll(ace_nome: string = null) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'SELECT a.*, p.plataforma_nome as plataforma_nome from acessorios a inner join plataforma p on a.plataforma_id = p.id';
+        let sql = 'SELECT a.*, p.plataforma_nome as plataforma_nome from acessorios a inner join plataforma p on a.plataforma_id = p.id ORDER BY id DESC';
         var data: any[] = [];
  
         // filtrando pelo nome

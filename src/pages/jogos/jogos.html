@@ -1,8 +1,8 @@
 
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Jogos</ion-title>
+  <ion-navbar color='verdeok'>
+    <ion-title text-center>Jogos</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,7 +22,7 @@
           </button>
      
           <ion-item-options side="left">
-            <button ion-button color="danger" (click)="removeJogos(jogo)">
+            <button ion-button color="danger" (click)="presentConfirm(jogo)">
               <ion-icon name="trash"></ion-icon>
               Excluir
             </button>
@@ -32,7 +32,7 @@
       </ion-list>
   
       <ion-fab right bottom>
-          <button ion-fab color="light" (click)="addJogos()"><ion-icon name="add"></ion-icon></button>
+          <button ion-fab color="twitter" (click)="addJogos()"><ion-icon name="add"></ion-icon></button>
         </ion-fab>
 
 </ion-content>

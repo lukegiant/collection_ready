@@ -1,12 +1,24 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home Collection</ion-title>
+  <ion-navbar color='verdeok'>
+    <ion-title text-center>MyCollection</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let item of itens">
+     
+          <button ion-item>
+            <h1>{{ item.con_nome }}</h1>
+            <h2>{{ item.con_empre }}</h2>
+            <h2>{{ item.con_duedate }}</h2>
+            <h2>{{ item.tipo_console_nome }}</h2>
+          </button>
+     
+        </ion-item-sliding>
+      </ion-list>
 
 
 </ion-content>
