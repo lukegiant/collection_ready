@@ -25,7 +25,7 @@ export class AcessoriosPage {
         this.acessorios = result;
       });
   }
-
+ 
   addAcessorio() {
     this.navCtrl.push('EditAcessoriosPage');
   }
@@ -59,7 +59,13 @@ export class AcessoriosPage {
     alert.present();
   }
 
-  /*removeAcessorio(acessorio: Cadace) {
+  filterAcessorios(ev: any) {
+    this.getAllAcessorios();
+  }
+
+}
+
+/*removeAcessorio(acessorio: Cadace) {
     this.acessorioProvider.remove(acessorio.id)
       .then(() => {
         // Removendo do array de consoles
@@ -68,9 +74,3 @@ export class AcessoriosPage {
         this.toast.create({ message: 'Item removido.', duration: 3000, position: 'botton' }).present();
       })
   } */
-
-  filterAcessorios(ev: any) {
-    this.getAllAcessorios();
-  }
-
-}

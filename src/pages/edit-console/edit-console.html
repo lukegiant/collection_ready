@@ -1,49 +1,52 @@
 <ion-header>
   <ion-navbar color='outracor'>
-    <ion-title text-center>Cadastrar Console</ion-title>
+    <ion-title>CADASTRAR CONSOLE </ion-title>
   </ion-navbar>
 </ion-header>
-
+ 
 
 <ion-content padding>
-  <ion-list>
-
-    <ion-item>
-      <ion-label stacked>Nome</ion-label>
-      <ion-input type="text" name="con_nome" [(ngModel)]="model.con_nome"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Empresa</ion-label>
-      <ion-input type="text" name="con_empre" [(ngModel)]="model.con_empre"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Data de Lançamento</ion-label>
-      <ion-datetime displayFormat="DD/MMM/YYYY" name="con_duedate" [(ngModel)]="model.con_duedate"></ion-datetime>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Tipo</ion-label>
-      <ion-select name="tipo_console_id" [(ngModel)]="model.tipo_console_id">
-        <ion-option *ngFor="let tipo_consoles of tipo_console" value="{{ tipo_consoles.id }}">{{ tipo_consoles.tipo_console_nome }}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Midia</ion-label>
-      <ion-select name="midia_id" [(ngModel)]="model.midia_id">
-        <ion-option *ngFor="let midias of midia" value="{{ midias.id }}">{{ midias.midia_nome }}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-        <ion-label stacked>Descrição</ion-label>
-        <ion-input type="text" name="con_desc" [(ngModel)]="model.con_desc"></ion-input>
+  <form padding [formGroup]="validCon" (submit)="valida()" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Nome do Console</ion-label>
+        <ion-input [(ngModel)]="model.con_nome" formControlName="con_nome" type="text" clearInput clearOnEdit="false">
+        </ion-input>
+      </ion-item>
+      <h6 *ngIf="errorNome" class="error">{{ messageNome }}</h6>
+      <ion-item>
+        <ion-label stacked>Empresa</ion-label>
+        <ion-input [(ngModel)]="model.con_empre" formControlName="con_empre" type="text" clearInput clearOnEdit="false">
+        </ion-input>
+      </ion-item>
+      <h6 *ngIf="errorEmpre" class="error">{{ messageEmpre }}</h6>
+      <ion-item>
+        <ion-label stacked>Data de Lançamento</ion-label>
+        <ion-datetime displayFormat="DD/MMM/YYYY" formControlName="con_duedate" name="con_duedate" [(ngModel)]="model.con_duedate"></ion-datetime>
+      </ion-item>
+      <h6 *ngIf="errorData" class="error">{{ messageData }}</h6>
+      <ion-item>
+        <ion-label stacked>Tipo</ion-label>
+        <ion-select name="tipo_console_id" [(ngModel)]="model.tipo_console_id" formControlName="tipo_console_id">
+          <ion-option *ngFor="let tipo_consoles of tipo_console" value="{{ tipo_consoles.id }}">{{ tipo_consoles.tipo_console_nome }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <h6 *ngIf="errorTipoConsole" class="error">{{ messageTipoConsole }}</h6>
+      <ion-item>
+        <ion-label stacked>Midia</ion-label>
+        <ion-select name="midia_id" [(ngModel)]="model.midia_id" formControlName="midia_id">
+          <ion-option *ngFor="let midias of midia" value="{{ midias.id }}">{{ midias.midia_nome }}</ion-option>
+        </ion-select>
       </ion-item>
 
-  </ion-list>
+      <ion-item>
+        <ion-label stacked>Descrição</ion-label>
+        <ion-input type="text" name="con_desc" [(ngModel)]="model.con_desc" formControlName="con_desc"></ion-input>
+      </ion-item>
 
-  <button ion-button block (click)="save()">Salvar</button>
+      <button ion-button block>Salvar</button>
+
+    </ion-list>
+  </form>
 
 </ion-content>

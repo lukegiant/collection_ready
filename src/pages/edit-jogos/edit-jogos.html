@@ -1,72 +1,84 @@
 <ion-header>
 
   <ion-navbar color='outracor'>
-    <ion-title text-center>Cadastrar Jogo</ion-title>
+    <ion-title>CADASTRAR JOGO </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
+  <form padding [formGroup]="validJog" (submit)="valida()" novalidate>
+    <ion-list class="formulario">
+      
+      <ion-item>
+        <ion-label stacked class="formulario">Nome do Jogo</ion-label>
+        <ion-input type="text" name="jog_nome" formControlName="jog_nome" [(ngModel)]="model.jog_nome"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Nome</ion-label>
-      <ion-input type="text" name="jog_nome" [(ngModel)]="model.jog_nome"></ion-input>
-    </ion-item>
+      <h6 *ngIf="errorJog_nome" class="error">{{ messageJog_nome }}</h6>
 
-    <ion-item>
-      <ion-label stacked>Desenvolvedora</ion-label>
-      <ion-input type="text" name="jog_desen" [(ngModel)]="model.jog_desen"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Desenvolvedora</ion-label>
+        <ion-input type="text" name="jog_desen" formControlName="jog_desen" [(ngModel)]="model.jog_desen"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Distribuidora</ion-label>
-      <ion-input type="text" name="jog_dist" [(ngModel)]="model.jog_dist"></ion-input>
-    </ion-item>
+      <h6 *ngIf="errorJog_desen" class="error">{{ messageJog_desen }}</h6>
 
-    <ion-item>
-      <ion-label stacked>Data de Lançamento</ion-label>
-      <ion-datetime displayFormat="DD/MMM/YYYY" name="jog_duedate" [(ngModel)]="model.jog_duedate"></ion-datetime>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Distribuidora</ion-label>
+        <ion-input type="text" name="jog_dist" formControlName="jog_dist" [(ngModel)]="model.jog_dist"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Plataforma</ion-label>
-      <ion-select name="plataforma_id" [(ngModel)]="model.plataforma_id">
-        <ion-option *ngFor="let plataformas of plataforma" value="{{ plataformas.id }}">{{ plataformas.plataforma_nome }}</ion-option>
-      </ion-select>
-    </ion-item>
+      <h6 *ngIf="errorJog_dist" class="error">{{ messageJog_dist }}</h6>
 
-    <ion-item>
-      <ion-label stacked>Midia</ion-label>
-      <ion-select name="midia_id" [(ngModel)]="model.midia_id">
-        <ion-option *ngFor="let midias of midia" value="{{ midias.id }}">{{ midias.midia_nome }}</ion-option>
-      </ion-select>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Data de Lançamento</ion-label>
+        <ion-datetime displayFormat="DD/MMM/YYYY" name="jog_duedate" formControlName="jog_duedate" [(ngModel)]="model.jog_duedate"></ion-datetime>
+      </ion-item>
 
-    <ion-item>
+      <h6 *ngIf="errorJog_duedate" class="error">{{ messageJog_duedate }}</h6>
+
+      <ion-item>
+        <ion-label stacked>Plataforma</ion-label>
+        <ion-select name="plataforma_id" [(ngModel)]="model.plataforma_id" formControlName="plataforma_id">
+          <ion-option *ngFor="let plataformas of plataforma" value="{{ plataformas.id }}">{{ plataformas.plataforma_nome }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <h6 *ngIf="errorPlataforma_id" class="error">{{ messageJog_Plataforma_id }}</h6>
+
+      <ion-item>
+        <ion-label stacked>Midia</ion-label>
+        <ion-select name="midia_id" [(ngModel)]="model.midia_id" formControlName="midia_id">
+          <ion-option *ngFor="let midias of midia" value="{{ midias.id }}">{{ midias.midia_nome }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
         <ion-label stacked>Versão</ion-label>
-        <ion-select name="versao_id" [(ngModel)]="model.versao_id">
+        <ion-select name="versao_id" [(ngModel)]="model.versao_id" formControlName="versao_id">
           <ion-option *ngFor="let versoes of versao" value="{{ versoes.id }}">{{ versoes.versao_nome }}</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-          <ion-label stacked>Gênero</ion-label>
-          <ion-select name="genero_id" [(ngModel)]="model.genero_id">
-            <ion-option *ngFor="let generos of genero" value="{{ generos.id }}">{{ generos.genero_nome }}</ion-option>
-          </ion-select>
-        </ion-item>
+        <ion-label stacked>Gênero</ion-label>
+        <ion-select name="genero_id" [(ngModel)]="model.genero_id" formControlName="genero_id">
+          <ion-option *ngFor="let generos of genero" value="{{ generos.id }}">{{ generos.genero_nome }}</ion-option>
+        </ion-select>
+      </ion-item>
 
-        <ion-item>
-          <ion-label stacked>Região</ion-label>
-          <ion-select name="regiao_id" [(ngModel)]="model.regiao_id">
-            <ion-option *ngFor="let regioes of regiao" value="{{ regioes.id }}">{{ regioes.regiao_nome }}</ion-option>
-          </ion-select>
-        </ion-item>
+      <ion-item>
+        <ion-label stacked>Região</ion-label>
+        <ion-select name="regiao_id" [(ngModel)]="model.regiao_id" formControlName="regiao_id">
+          <ion-option *ngFor="let regioes of regiao" value="{{ regioes.id }}">{{ regioes.regiao_nome }}</ion-option>
+        </ion-select>
+      </ion-item>
 
-  </ion-list>
+      <button ion-button block>Salvar</button>
 
-  <button ion-button block (click)="save()">Salvar</button>
+    </ion-list>
+  </form>
 
 </ion-content>

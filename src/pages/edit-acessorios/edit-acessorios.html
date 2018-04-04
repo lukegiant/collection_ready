@@ -1,52 +1,54 @@
-
 <ion-header>
 
   <ion-navbar color='outracor'>
-    <ion-title text-center>Cadastrar Acessório</ion-title>
+    <ion-title>CADASTRAR ACESSÓRIO</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <form padding [formGroup]="validAce" (submit)="valida()" novalidate>
     <ion-list>
+      <ion-item>
+        <ion-label stacked>Nome do Acessório</ion-label>
+        <ion-input [(ngModel)]="model.ace_nome" formControlName="ace_nome" type="text" clearInput clearOnEdit="false">
+        </ion-input>
+      </ion-item>
+      <h6 *ngIf="errorAce_nome" class="error">{{ messageAce_nome }}</h6>
+      <ion-item>
+        <ion-label stacked>Fabricante</ion-label>
+        <ion-input [(ngModel)]="model.ace_fabri" formControlName="ace_fabri" type="text" clearInput clearOnEdit="false">
+        </ion-input>
+      </ion-item>
+      <h6 *ngIf="errorAce_fabri" class="error">{{ messageAce_fabri }}</h6>
+      <ion-item>
+        <ion-label stacked>Data de Lançamento</ion-label>
+        <ion-datetime displayFormat="DD/MMM/YYYY" formControlName="ace_duedate" name="ace_duedate" [(ngModel)]="model.ace_duedate"></ion-datetime>
+      </ion-item>
+      <h6 *ngIf="errorAce_duedate" class="error">{{ messageAce_duedate }}</h6>
+      <ion-item>
+        <ion-label stacked>Plataforma</ion-label>
+        <ion-select name="plataforma_id" [(ngModel)]="model.plataforma_id" formControlName="plataforma_id">
+          <ion-option *ngFor="let plataformas of plataforma" value="{{ plataformas.id }}">{{ plataformas.plataforma_nome }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <h6 *ngIf="errorPlataforma_id" class="error">{{ messagePlataforma_id }}</h6>
+      <ion-item>
+        <ion-label stacked>Tipo</ion-label>
+        <ion-select name="tipo_id" [(ngModel)]="model.tipo_id" formControlName="tipo_id">
+          <ion-option *ngFor="let tipos of tipo" value="{{ tipos.id }}">{{ tipos.tipo_nome }}</ion-option>
+        </ion-select>
+      </ion-item>
 
-        <ion-item>
-          <ion-label stacked>Nome</ion-label>
-          <ion-input type="text" name="ace_nome" [(ngModel)]="model.ace_nome"></ion-input>
-        </ion-item>
-    
-        <ion-item>
-          <ion-label stacked>Fabricante</ion-label>
-          <ion-input type="text" name="ace_fabri" [(ngModel)]="model.ace_fabri"></ion-input>
-        </ion-item>
-    
-        <ion-item>
-          <ion-label stacked>Data de Lançamento</ion-label>
-          <ion-datetime displayFormat="DD/MMM/YYYY" name="ace_duedate" [(ngModel)]="model.ace_duedate"></ion-datetime>
-        </ion-item>
-    
-        <ion-item>
-          <ion-label stacked>Tipo</ion-label>
-          <ion-select name="tipo_id" [(ngModel)]="model.tipo_id">
-            <ion-option *ngFor="let tipos of tipo" value="{{ tipos.id }}">{{ tipos.tipo_nome }}</ion-option>
-          </ion-select>
-        </ion-item>
-     
-        <ion-item>
-          <ion-label stacked>Plataforma</ion-label>
-          <ion-select name="plataforma_id" [(ngModel)]="model.plataforma_id">
-            <ion-option *ngFor="let plataformas of plataforma" value="{{ plataformas.id }}">{{ plataformas.plataforma_nome }}</ion-option>
-          </ion-select>
-        </ion-item>
+      <ion-item>
+        <ion-label stacked>Descrição</ion-label>
+        <ion-input type="text" name="ace_desc" [(ngModel)]="model.ace_desc" formControlName="ace_desc"></ion-input>
+      </ion-item>
 
-          <ion-item>
-              <ion-label stacked>Descrição</ion-label>
-              <ion-input type="text" name="ace_desc" [(ngModel)]="model.ace_desc"></ion-input>
-            </ion-item>
-    
-      </ion-list>
-    
-      <button ion-button block (click)="save()">Salvar</button>
+      <button ion-button block>Salvar</button>
+
+    </ion-list>
+  </form>
 
 </ion-content>
