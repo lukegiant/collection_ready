@@ -10,8 +10,8 @@ export class JogosProvider {
   public insert(cadjogo: Cadjogo) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into jogos (jog_nome, jog_desen, jog_dist, jog_duedate, plataforma_id, midia_id, versao_id, genero_id, regiao_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id];
+        let sql = 'insert into jogos (jog_nome, jog_desen, jog_dist, jog_duedate, plataforma_id, midia_id, versao_id, genero_id, regiao_id, foto) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id, cadjogo.foto];
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
@@ -21,8 +21,8 @@ export class JogosProvider {
   public update(cadjogo: Cadjogo) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'update jogos set jog_nome = ?, jog_desen = ?, jog_dist = ?, jog_duedate = ?, plataforma_id = ?, midia_id = ?, versao_id = ?, genero_id = ?, regiao_id = ? where id = ?';
-        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id, cadjogo.id];
+        let sql = 'update jogos set jog_nome = ?, jog_desen = ?, jog_dist = ?, jog_duedate = ?, plataforma_id = ?, midia_id = ?, versao_id = ?, genero_id = ?, regiao_id = ?, foto = ? where id = ?';
+        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id, cadjogo.foto, cadjogo.id];
 
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
@@ -63,6 +63,7 @@ export class JogosProvider {
               cadjogo.versao_id = item.versao_id;
               cadjogo.genero_id = item.genero_id;
               cadjogo.regiao_id = item.regiao_id;
+              cadjogo.foto = item.foto;
 
               return cadjogo;
             }
@@ -77,12 +78,12 @@ export class JogosProvider {
   public getAll(jog_nome: string = null) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'SELECT j.*, p.plataforma_nome as plataforma_nome from jogos j inner join plataforma p on j.plataforma_id = p.id ORDER BY id DESC';
+        let sql = 'SELECT j.*, p.plataforma_nome as plataforma_nome from jogos j inner join plataforma p on j.plataforma_id = p.id';
         var data: any[] = [];
  
         // filtrando pelo nome
         if (jog_nome) {
-          sql += ' and jog_nome like ?'
+          sql += ' and j.jog_nome like ?'
           data.push('%' + jog_nome + '%');
         } 
  
@@ -115,6 +116,7 @@ export class Cadjogo {
   midia_id: number;
   versao_id: number;
   genero_id: number;
-  regiao_id: number
+  regiao_id: number;
+  foto: string;
 }
 

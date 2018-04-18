@@ -8,8 +8,17 @@
 
 
 <ion-content padding>
+
+  <button ion-button small (click)="takePicture_gallery()">Add Imagem Galeria</button>
+  <br>
+
   <form padding [formGroup]="validAce" (submit)="valida()" novalidate>
+
+    <ion-img (click)="takePicture_gallery()" class="imagem" src="{{model.foto}}"></ion-img>
+    <br>
+
     <ion-list>
+
       <ion-item>
         <ion-label stacked>Nome do Acessório</ion-label>
         <ion-input [(ngModel)]="model.ace_nome" formControlName="ace_nome" type="text" clearInput clearOnEdit="false">
@@ -43,7 +52,7 @@
 
       <ion-item>
         <ion-label stacked>Descrição</ion-label>
-        <ion-input type="text" name="ace_desc" [(ngModel)]="model.ace_desc" formControlName="ace_desc"></ion-input>
+        <ion-textarea rows="5" type="text" name="ace_desc" [(ngModel)]="model.ace_desc" formControlName="ace_desc"></ion-textarea>
       </ion-item>
 
       <button ion-button block>Salvar</button>

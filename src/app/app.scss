@@ -21,4 +21,68 @@
 
 ion-app.md [padding] {
     padding: 0px;
+    background-image: url('../assets/imgs/cover6.png');
+    background-size: cover;
+}
+
+
+
+.item-md ion-thumbnail img {
+    width: 90px;
+    height: 120px;
+}
+
+img {
+  max-width: 100%;
+  border: 0;
+  margin: auto;
+  display: block;
+}
+
+.button-small-md {
+    height: 2.1em;
+    font-size: 1.3rem;
+    padding: 0 0.9em;
+    display: block;
+    margin: auto;
+}
+
+.imagem {
+    width: 200px;
+    
+    margin: auto;
+    display: block;
+}
+
+.toolbar-title-md {
+    color: #222;
+    font-family: inherit;
+    font-size: x-large;
+  }
+
+  .searchbar-md .searchbar-input {
+    padding: 6px 55px;
+    border-radius: 20px;
+    background-position: left 8px center;
+    height: auto;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 3rem;
+    color: #ffffff;
+    background-color: #444444;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  .toolbar-title-md {
+    color: #222;
+    font-family: inherit;
+    font-size: x-large;
+  }
+
+  .list-options{
+    color: #222222;
+    width: 150%;
+    margin-right: 5px;
+    right: 15px;
 }

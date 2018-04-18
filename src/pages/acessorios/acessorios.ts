@@ -11,6 +11,7 @@ import { AcessorioProvider, Cadace } from '../../providers/acessorio/acessorio';
 export class AcessoriosPage {
   acessorios: any[] = [];
   searchText: string = null;
+  
 
   constructor(public navCtrl: NavController, private toast: ToastController, 
     private acessorioProvider: AcessorioProvider, private alertCtrl: AlertController) { }
@@ -25,7 +26,7 @@ export class AcessoriosPage {
         this.acessorios = result;
       });
   }
- 
+    
   addAcessorio() {
     this.navCtrl.push('EditAcessoriosPage');
   }

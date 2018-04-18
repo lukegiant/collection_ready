@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
 import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,6 +20,11 @@ import { TipoProvider } from '../providers/tipo/tipo';
 import { TipoConsoleProvider } from '../providers/tipo-console/tipo-console';
 import { PlataformaProvider } from '../providers/plataforma/plataforma';
 import { HomeProvider } from '../providers/home/home';
+
+import { Camera } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
+import ptBR from '@angular/common/locales/pt';
+registerLocaleData(ptBR)
  
 @NgModule({
   declarations: [
@@ -37,7 +43,7 @@ import { HomeProvider } from '../providers/home/home';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: LOCALE_ID, useValue: 'pt-BR'},
+    {provide: LOCALE_ID, useValue: 'pt-PT'},
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SQLite,
     DatabaseProvider,
@@ -52,7 +58,9 @@ import { HomeProvider } from '../providers/home/home';
     TipoProvider,
     TipoConsoleProvider,
     PlataformaProvider,
-    HomeProvider
+    HomeProvider, 
+    Camera, 
+    ImagePicker
   ]
 })
 export class AppModule {}

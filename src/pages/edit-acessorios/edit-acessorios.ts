@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Cadace, AcessorioProvider } from '../../providers/acessorio/acessorio';
 import { TipoProvider } from '../../providers/tipo/tipo';
 import { PlataformaProvider } from '../../providers/plataforma/plataforma';
+
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 @IonicPage()
@@ -30,7 +32,7 @@ export class EditAcessoriosPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, private acessorioProvider: AcessorioProvider,
     private tipoProvider: TipoProvider, private plataformaProvider: PlataformaProvider,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder, private camera: Camera) {
 
     this.model = new Cadace();
 
@@ -48,6 +50,7 @@ export class EditAcessoriosPage {
       plataforma_id: ['', Validators.required],
       tipo_id: [''],
       ace_desc: [''],
+      foto: [''],
     })
 
   }
@@ -135,6 +138,60 @@ export class EditAcessoriosPage {
       })
     }
   }
+
+  takePicture_gallery() {
+ 
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      allowEdit: false,
+      targetWidth: 200,
+      targetHeight: 285.
+    }
+ 
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        let base64image = 'data:image/jpeg;base64,' + imageData;
+        this.model.foto = base64image; 
+        
+        
+      }, (error) => {
+        console.error(error);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  }
+
+  /*takePicture_camera() {
+ 
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType : this.camera.PictureSourceType.CAMERA,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      allowEdit: false,
+      targetWidth: 200,
+      targetHeight: 285.
+    }
+ 
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        let base64image = 'data:image/jpeg;base64,' + imageData;
+        this.model.foto = base64image; 
+        
+        
+      }, (error) => {
+        console.error(error);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  }*/
 
 }
 

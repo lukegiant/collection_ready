@@ -1,38 +1,48 @@
-
 <ion-header>
 
   <ion-navbar color='verdeok'>
     <ion-title text-center>JOGOS</ion-title>
+    <ion-buttons end>
+      <button class="list-options" ion-button outline color="light">
+        <ion-icon name="list">
+        </ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-searchbar (ionInput)="filterJogos($event)" [(ngModel)]="searchText"></ion-searchbar>
-    <ion-list>
-        <ion-item-sliding *ngFor="let jogo of jogos">
-     
-          <button ion-item (click)="editJogos(jogo.id)">
-            <h1>{{ jogo.jog_nome }}</h1>
-            <h2>{{ jogo.jog_desen }}</h2>
-            <h2>{{ jogo.jog_dist }}</h2>
-            <h2>{{ jogo.jog_duedate }}</h2>
-            <h2>{{ jogo.plataforma_nome }}</h2>
-          </button>
-     
-          <ion-item-options side="left">
-            <button ion-button color="danger" (click)="presentConfirm(jogo)">
-              <ion-icon name="trash"></ion-icon>
-              Excluir
-            </button>
-          </ion-item-options>
-     
-        </ion-item-sliding>
-      </ion-list>
-  
-      <ion-fab right bottom>
-          <button ion-fab color="twitter" (click)="addJogos()"><ion-icon name="add"></ion-icon></button>
-        </ion-fab>
+  <ion-searchbar (ionInput)="filterJogos($event)" [(ngModel)]="searchText"></ion-searchbar>
+  <ion-list>
+    <ion-item-sliding *ngFor="let jogo of jogos">
+
+      <button ion-item (click)="editJogos(jogo.id)">
+        <ion-thumbnail item-start>
+          <img src="{{ jogo.foto }}">
+        </ion-thumbnail>
+        <h1>{{ jogo.jog_nome }}</h1>
+        <h2>{{ jogo.jog_desen }}</h2>
+        <h2>{{ jogo.jog_dist }}</h2>
+        <h2>{{ jogo.jog_duedate | date:'dd/MM/yyyy' }}</h2>
+        <h2>{{ jogo.plataforma_nome }}</h2>
+      </button>
+
+      <ion-item-options side="left">
+        <button ion-button color="danger" (click)="presentConfirm(jogo)">
+          <ion-icon name="trash"></ion-icon>
+          Excluir
+        </button>
+      </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="twitter" (click)="addJogos()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 
 </ion-content>

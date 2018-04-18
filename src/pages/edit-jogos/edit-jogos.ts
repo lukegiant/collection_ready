@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Cadjogo, JogosProvider } from '../../providers/jogos/jogos';
 import { MidiaProvider } from '../../providers/midia/midia';
 import { VersaoProvider } from '../../providers/versao/versao';
 import { GeneroProvider } from '../../providers/genero/genero';
 import { RegiaoProvider } from '../../providers/regiao/regiao';
 import { PlataformaProvider } from '../../providers/plataforma/plataforma';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -32,12 +33,13 @@ export class EditJogosPage {
   messageJog_dist = "";
   messageJog_duedate = "";
   messageJog_Plataforma_id = "";
-  
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, private jogosProvider: JogosProvider,
-    private midiaProvider: MidiaProvider, private versaoProvider: VersaoProvider, 
-    private generoProvider: GeneroProvider, private regiaoProvider: RegiaoProvider, 
-    private plataformaProvider: PlataformaProvider, private formBuilder: FormBuilder) {
+    private midiaProvider: MidiaProvider, private versaoProvider: VersaoProvider,
+    private generoProvider: GeneroProvider, private regiaoProvider: RegiaoProvider,
+    private plataformaProvider: PlataformaProvider, private formBuilder: FormBuilder,
+    private camera: Camera) {
 
     this.model = new Cadjogo();
 
@@ -50,7 +52,7 @@ export class EditJogosPage {
 
     this.validJog = formBuilder.group({
       jog_nome: ['', Validators.required],
-      jog_desen: ['', Validators.required], 
+      jog_desen: ['', Validators.required],
       jog_dist: ['', Validators.required],
       jog_duedate: ['', Validators.required],
       plataforma_id: ['', Validators.required],
@@ -58,6 +60,7 @@ export class EditJogosPage {
       versao_id: [''],
       genero_id: [''],
       regiao_id: [''],
+      foto: [''],
     })
 
   }
@@ -65,12 +68,12 @@ export class EditJogosPage {
   ionViewDidLoad() {
 
     this.plataformaProvider.getAll()
-    .then((result: any[]) => {
-      this.plataforma = result;
-    })
-    .catch(() => {
-      this.toast.create({ message: 'Erro ao carregar as plataformas', duration: 3000, position: 'botton' }).present();
-    });
+      .then((result: any[]) => {
+        this.plataforma = result;
+      })
+      .catch(() => {
+        this.toast.create({ message: 'Erro ao carregar as plataformas', duration: 3000, position: 'botton' }).present();
+      });
 
     this.midiaProvider.getAll()
       .then((result: any[]) => {
@@ -80,7 +83,7 @@ export class EditJogosPage {
         this.toast.create({ message: 'Erro ao carregar as midias', duration: 3000, position: 'botton' }).present();
       });
 
-      this.versaoProvider.getAll()
+    this.versaoProvider.getAll()
       .then((result: any[]) => {
         this.versao = result;
       })
@@ -88,7 +91,7 @@ export class EditJogosPage {
         this.toast.create({ message: 'Erro ao carregar as versões', duration: 3000, position: 'botton' }).present();
       });
 
-      this.generoProvider.getAll()
+    this.generoProvider.getAll()
       .then((result: any[]) => {
         this.genero = result;
       })
@@ -96,7 +99,7 @@ export class EditJogosPage {
         this.toast.create({ message: 'Erro ao carregar os gêneros', duration: 3000, position: 'botton' }).present();
       });
 
-      this.regiaoProvider.getAll()
+    this.regiaoProvider.getAll()
       .then((result: any[]) => {
         this.regiao = result;
       })
@@ -126,38 +129,38 @@ export class EditJogosPage {
 
 
   public valida() {
-    let {jog_nome, jog_desen, jog_dist, jog_duedate, plataforma_id} = this.validJog.controls;
+    let { jog_nome, jog_desen, jog_dist, jog_duedate, plataforma_id } = this.validJog.controls;
 
-    if(!this.validJog.valid){
-      if(!jog_nome.valid){
+    if (!this.validJog.valid) {
+      if (!jog_nome.valid) {
         this.errorJog_nome = true;
         this.messageJog_nome = 'campo obrigatório'
       } else {
         this.messageJog_nome = '';
       }
 
-      if (!jog_desen.valid){
+      if (!jog_desen.valid) {
         this.errorJog_desen = true;
         this.messageJog_desen = 'campo obrigatório'
       } else {
         this.messageJog_desen = '';
       }
 
-      if(!jog_dist.valid){
+      if (!jog_dist.valid) {
         this.errorJog_dist = true;
         this.messageJog_dist = 'campo obrigatório'
       } else {
         this.messageJog_dist = '';
       }
 
-      if(!jog_duedate.valid){
+      if (!jog_duedate.valid) {
         this.errorJog_duedate = true;
         this.messageJog_duedate = 'campo obrigatório'
       } else {
         this.messageJog_duedate = '';
       }
 
-      if(!plataforma_id.valid){
+      if (!plataforma_id.valid) {
         this.errorPlataforma_id = true;
         this.messageJog_Plataforma_id = 'campo obrigatório'
       } else {
@@ -165,14 +168,41 @@ export class EditJogosPage {
       }
     } else {
       this.saveJogo()
-      .then(() => {
-        this.toast.create({ message: 'Jogo salvo.', duration: 3000, position: 'botton' }).present();
-        this.navCtrl.pop();
-      })
-      .catch(() => {
-        this.toast.create({ message: 'Erro ao salvar o Jogo.', duration: 3000, position: 'botton' }).present();
-      })
+        .then(() => {
+          this.toast.create({ message: 'Jogo salvo.', duration: 3000, position: 'botton' }).present();
+          this.navCtrl.pop();
+        })
+        .catch(() => {
+          this.toast.create({ message: 'Erro ao salvar o Jogo.', duration: 3000, position: 'botton' }).present();
+        })
     }
+  }
+
+  takePicture_gallery() {
+ 
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      allowEdit: false,
+      targetWidth: 200,
+      targetHeight: 285.
+    }
+ 
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        let base64image = 'data:image/jpeg;base64,' + imageData;
+        this.model.foto = base64image; 
+        
+        
+      }, (error) => {
+        console.error(error);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
   }
 
 }

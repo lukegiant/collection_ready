@@ -8,9 +8,17 @@
 
 
 <ion-content padding>
+
+  <button ion-button small (click)="takePicture_gallery()">Add Imagem Galeria</button>
+  <br>
+
   <form padding [formGroup]="validJog" (submit)="valida()" novalidate>
+
+    <ion-img (click)="takePicture_gallery()" class="imagem" src="{{model.foto}}"></ion-img>
+    <br>
+
     <ion-list class="formulario">
-      
+
       <ion-item>
         <ion-label stacked class="formulario">Nome do Jogo</ion-label>
         <ion-input type="text" name="jog_nome" formControlName="jog_nome" [(ngModel)]="model.jog_nome"></ion-input>

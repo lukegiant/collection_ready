@@ -2,8 +2,14 @@
 
   <ion-navbar color='verdeok'>
     <ion-title text-center>CONSOLES</ion-title>
+    <ion-buttons end>
+      <button class="list-options" ion-button outline color="light">
+        <ion-icon name="list">
+        </ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-  
+
 </ion-header>
 
 
@@ -13,9 +19,12 @@
     <ion-item-sliding *ngFor="let console of consoles">
 
       <button ion-item (click)="editConsole(console.id)">
+        <ion-thumbnail item-start>
+          <img src="{{ console.foto }}">
+        </ion-thumbnail>
         <h1>{{ console.con_nome }}</h1>
         <h2>{{ console.con_empre }}</h2>
-        <h2>{{ console.con_duedate }}</h2>
+        <h2>{{ console.con_duedate | date:'dd/MM/yyyy' }}</h2>
         <h2>{{ console.tipo_console_nome }}</h2>
       </button>
 

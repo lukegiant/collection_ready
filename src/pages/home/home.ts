@@ -10,7 +10,6 @@ import { HomeProvider } from '../../providers/home/home';
 })
 export class HomePage {
   itens: any[] = [];
-  searchText: string = null;
 
   constructor(public navCtrl: NavController, private toast: ToastController, private homeProvider: HomeProvider) {
   }
@@ -20,7 +19,7 @@ export class HomePage {
   }
 
   getAllItens() {
-    this.homeProvider.getAllItens(this.searchText)
+    this.homeProvider.getAllItens()
       .then((result: any[]) => {
         this.itens = result;
       });

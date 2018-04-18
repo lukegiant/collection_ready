@@ -55,6 +55,7 @@ export class DatabaseProvider {
       'tipo_console_id integer,' + 
       'con_desc TEXT,' + 
       'midia_id integer,' + 
+      'foto BLOB,' + 
       'FOREIGN KEY(midia_id) REFERENCES midia(id),' + 
       'FOREIGN KEY(tipo_console_id) REFERENCES tipo_console(id))'],
       //br
@@ -65,6 +66,7 @@ export class DatabaseProvider {
       'tipo_id integer,' + 
       'plataforma_id integer,' + 
       'ace_desc TEXT,' + 
+      'foto BLOB,' + 
       'FOREIGN KEY(tipo_id) REFERENCES tipo(id),' + 
       'FOREIGN KEY(plataforma_id) REFERENCES plataforma(id))'],
       //br
@@ -78,6 +80,7 @@ export class DatabaseProvider {
       'versao_id integer,' + 
       'genero_id integer,' + 
       'regiao_id integer,' +
+      'foto BLOB,' +
       'FOREIGN KEY(plataforma_id) REFERENCES plataforma(id),' + 
       'FOREIGN KEY(midia_id) REFERENCES midia(id),' + 
       'FOREIGN KEY(versao_id) REFERENCES versao(id),' + 

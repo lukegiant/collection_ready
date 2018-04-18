@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ConsoleProvider, Cadconsole } from '../../providers/console/console';
 import { MidiaProvider } from '../../providers/midia/midia'
 import { TipoConsoleProvider } from '../../providers/tipo-console/tipo-console';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -31,7 +32,7 @@ export class EditConsolePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, private consoleProvider: ConsoleProvider,
     private midiaProvider: MidiaProvider, private tipo_consoleProvider: TipoConsoleProvider, 
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder, private camera: Camera) {
 
     this.model = new Cadconsole();
 
@@ -49,6 +50,7 @@ export class EditConsolePage {
       tipo_console_id: ['', Validators.required],
       midia_id: [''],
       con_desc: [''],
+      foto: [''],
     })
   }
 
@@ -130,6 +132,33 @@ export class EditConsolePage {
         this.toast.create({ message: 'Erro ao salvar o Console.', duration: 3000, position: 'botton' }).present();
       })
     }
+  }
+
+  takePicture_gallery() {
+ 
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      allowEdit: false,
+      targetWidth: 200,
+      targetHeight: 285.
+    }
+ 
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        let base64image = 'data:image/jpeg;base64,' + imageData;
+        this.model.foto = base64image; 
+        
+        
+      }, (error) => {
+        console.error(error);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
   }
 
 }

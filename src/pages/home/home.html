@@ -11,14 +11,19 @@
         <ion-item-sliding *ngFor="let item of itens">
      
           <button ion-item>
+              <ion-thumbnail item-start>
+                  <img src="{{ item.foto }}">
+                </ion-thumbnail>
             <h1>{{ item.con_nome }}</h1>
             <h2>{{ item.con_empre }}</h2>
-            <h2>{{ item.con_duedate }}</h2>
+            <h2>{{ item.con_duedate | date:'dd/MM/yyyy' }}</h2>
             <h2>{{ item.tipo_console_nome }}</h2>
           </button>
      
         </ion-item-sliding>
       </ion-list>
+
+    <p>Itens Cadastrados:</p>
 
 
 </ion-content>
