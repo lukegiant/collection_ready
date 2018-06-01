@@ -60,7 +60,16 @@ export class JogosPage {
     alert.present();
   }
 
-  /* removeJogos(jogos: Cadjogo) {
+  /* 
+  
+  <ion-buttons end>
+      <button class="list-options" ion-button outline color="light">
+        <ion-icon name="list">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  
+  removeJogos(jogos: Cadjogo) {
      this.jogosProvider.remove(jogos.id)
        .then(() => {
          // Removendo do array de jogos

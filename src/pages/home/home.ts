@@ -9,20 +9,129 @@ import { HomeProvider } from '../../providers/home/home';
   templateUrl: 'home.html',
 })
 export class HomePage {
-  itens: any[] = [];
+  conso: any[] = [];
+  jog: any[] = [];
+  ace: any[] = [];
+  home: string = "consoles";
 
-  constructor(public navCtrl: NavController, private toast: ToastController, private homeProvider: HomeProvider) {
+  constructor(public navCtrl: NavController, private toast: ToastController,
+    private homeProvider: HomeProvider) {
   }
 
   ionViewDidEnter() {
-    this.getAllItens();
+    switch (this.home) {
+      case "consoles": {
+        this.homeProvider.getAllConsoles()
+          .then((result: any[]) => {
+            this.conso = result;
+
+          });
+
+        this.homeProvider.getAllJogos()
+          .then((result2: any[]) => {
+            this.jog = result2;
+
+          });
+
+        this.homeProvider.getAllAcessorios()
+          .then((result3: any[]) => {
+            this.ace = result3;
+
+          });
+
+      }
+        break;
+
+      case "jogos": {
+
+        this.homeProvider.getAllJogos()
+          .then((result2: any[]) => {
+            this.jog = result2;
+
+          });
+
+        this.homeProvider.getAllConsoles()
+          .then((result: any[]) => {
+            this.conso = result;
+
+          });
+
+        this.homeProvider.getAllAcessorios()
+          .then((result3: any[]) => {
+            this.ace = result3;
+
+          });
+
+      }
+        break;
+      case "acessorios": {
+        this.homeProvider.getAllAcessorios()
+          .then((result3: any[]) => {
+            this.ace = result3;
+
+          });
+
+        this.homeProvider.getAllJogos()
+          .then((result2: any[]) => {
+            this.jog = result2;
+
+          });
+
+        this.homeProvider.getAllConsoles()
+          .then((result: any[]) => {
+            this.conso = result;
+
+          });
+
+      }
+        break;
+    }
+
   }
 
-  getAllItens() {
-    this.homeProvider.getAllItens()
-      .then((result: any[]) => {
-        this.itens = result;
-      });
+  editAcessorio(id: number) {
+    this.navCtrl.push('EditAcessoriosPage', { id: id });
   }
 
+  editConsole(id: number) {
+    this.navCtrl.push('EditConsolePage', { id: id });
+  }
+
+  editJogos(id: number) {
+    this.navCtrl.push('EditJogosPage', { id: id });
+  }
 }
+
+/*
+ionViewDidEnter() {
+  switch (this.home) {
+    case "consoles": {
+      this.homeProvider.getAllConsoles()
+        .then((result: any[]) => {
+          this.conso = result;
+        
+        });
+        
+    }
+    break;
+    case "jogos": {
+      this.homeProvider.getAllJogos()
+        .then((result2: any[]) => {
+          this.jog = result2;
+          
+        });
+        
+    }
+    break;
+    case "acessorios": {
+      this.homeProvider.getAllAcessorios()
+        .then((result3: any[]) => {
+          this.ace = result3;
+          
+        });
+        
+    }
+    break;
+  }
+  
+} */

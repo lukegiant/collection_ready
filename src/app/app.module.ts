@@ -24,6 +24,9 @@ import { HomeProvider } from '../providers/home/home';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import ptBR from '@angular/common/locales/pt';
+import { ExibeCProvider } from '../providers/exibe-c/exibe-c';
+import { ExibeJProvider } from '../providers/exibe-j/exibe-j';
+import { ExibeAProvider } from '../providers/exibe-a/exibe-a';
 registerLocaleData(ptBR)
  
 @NgModule({
@@ -60,7 +63,10 @@ registerLocaleData(ptBR)
     PlataformaProvider,
     HomeProvider, 
     Camera, 
-    ImagePicker
+    ImagePicker,
+    ExibeCProvider,
+    ExibeJProvider,
+    ExibeAProvider
   ]
 })
 export class AppModule {}

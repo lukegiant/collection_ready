@@ -60,7 +60,8 @@ export class EditJogosPage {
       versao_id: [''],
       genero_id: [''],
       regiao_id: [''],
-      foto: [''],
+      jog_foto: [''],
+      jog_desc: [''],
     })
 
   }
@@ -194,7 +195,7 @@ export class EditJogosPage {
     this.camera.getPicture(options)
       .then((imageData) => {
         let base64image = 'data:image/jpeg;base64,' + imageData;
-        this.model.foto = base64image; 
+        this.model.jog_foto = base64image; 
         
         
       }, (error) => {
@@ -208,7 +209,11 @@ export class EditJogosPage {
 }
 
 
-/* <ion-list>
+/* 
+
+<button ion-button small (click)="takePicture_gallery()">Add Imagem Galeria</button>
+
+<ion-list>
 
     <ion-item>
       <ion-label stacked>Nome</ion-label>

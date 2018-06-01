@@ -2,12 +2,7 @@
 
   <ion-navbar color='verdeok'>
     <ion-title text-center>JOGOS</ion-title>
-    <ion-buttons end>
-      <button class="list-options" ion-button outline color="light">
-        <ion-icon name="list">
-        </ion-icon>
-      </button>
-    </ion-buttons>
+    
   </ion-navbar>
 
 </ion-header>
@@ -20,7 +15,7 @@
 
       <button ion-item (click)="editJogos(jogo.id)">
         <ion-thumbnail item-start>
-          <img src="{{ jogo.foto }}">
+          <img src="{{ jogo.jog_foto }}">
         </ion-thumbnail>
         <h1>{{ jogo.jog_nome }}</h1>
         <h2>{{ jogo.jog_desen }}</h2>
@@ -34,6 +29,10 @@
           <ion-icon name="trash"></ion-icon>
           Excluir
         </button>
+        <button ion-button (click)="editJogos(jogo.id)">
+            <ion-icon name="ios-create"></ion-icon>
+            Editar
+          </button>
       </ion-item-options>
 
     </ion-item-sliding>

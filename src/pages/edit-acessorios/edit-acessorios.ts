@@ -50,11 +50,11 @@ export class EditAcessoriosPage {
       plataforma_id: ['', Validators.required],
       tipo_id: [''],
       ace_desc: [''],
-      foto: [''],
+      ace_fot: [''],
     })
 
   }
-
+ 
   ionViewDidLoad() {
     this.tipoProvider.getAll()
       .then((result: any[]) => {
@@ -155,7 +155,7 @@ export class EditAcessoriosPage {
     this.camera.getPicture(options)
       .then((imageData) => {
         let base64image = 'data:image/jpeg;base64,' + imageData;
-        this.model.foto = base64image; 
+        this.model.ace_fot = base64image; 
         
         
       }, (error) => {
@@ -166,7 +166,10 @@ export class EditAcessoriosPage {
       })
   }
 
-  /*takePicture_camera() {
+  /*
+  <button ion-button small (click)="takePicture_gallery()">Add Imagem Galeria</button>
+  
+  takePicture_camera() {
  
     const options: CameraOptions = {
       quality: 100,

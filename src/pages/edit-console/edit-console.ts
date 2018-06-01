@@ -50,7 +50,7 @@ export class EditConsolePage {
       tipo_console_id: ['', Validators.required],
       midia_id: [''],
       con_desc: [''],
-      foto: [''],
+      con_foto: [''],
     })
   }
 
@@ -146,11 +146,11 @@ export class EditConsolePage {
       targetWidth: 200,
       targetHeight: 285.
     }
- 
+  
     this.camera.getPicture(options)
       .then((imageData) => {
         let base64image = 'data:image/jpeg;base64,' + imageData;
-        this.model.foto = base64image; 
+        this.model.con_foto = base64image; 
         
         
       }, (error) => {
@@ -166,6 +166,9 @@ export class EditConsolePage {
 
 
 /* 
+
+<button ion-button small (click)="takePicture_gallery()">Add Imagem Galeria</button>
+
 <ion-list>
 
     <ion-item>

@@ -7,23 +7,74 @@
 
 <ion-content padding>
 
-    <ion-list>
-        <ion-item-sliding *ngFor="let item of itens">
-     
-          <button ion-item>
-              <ion-thumbnail item-start>
-                  <img src="{{ item.foto }}">
-                </ion-thumbnail>
-            <h1>{{ item.con_nome }}</h1>
-            <h2>{{ item.con_empre }}</h2>
-            <h2>{{ item.con_duedate | date:'dd/MM/yyyy' }}</h2>
-            <h2>{{ item.tipo_console_nome }}</h2>
-          </button>
-     
-        </ion-item-sliding>
-      </ion-list>
+  <div padding>
+    <ion-segment [(ngModel)]="home">
+      <ion-segment-button value="consoles">
+        Consoles
+      </ion-segment-button>
+      <ion-segment-button value="jogos" >
+        Jogos
+      </ion-segment-button>
+      <ion-segment-button value="acessorios" >
+        Acessórios
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
-    <p>Itens Cadastrados:</p>
+  <div [ngSwitch]="home">
 
+    <ion-list *ngSwitchCase="'consoles'">
+      <p>Consoles Cadastrados: {{ conso.length }}</p>
+      <ion-item-sliding *ngFor="let item of conso">
+
+        <button ion-item (click)="editConsole(item.id)">
+          <ion-thumbnail item-start>
+            <img src="{{ item.con_foto }}">
+          </ion-thumbnail>
+          <h1>{{ item.con_nome }}</h1>
+          <h2>{{ item.con_empre }}</h2>
+          <h2>{{ item.con_duedate | date:'dd/MM/yyyy' }}</h2>
+          <h2>{{ item.tipo_console_nome }}</h2>
+        </button>
+
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'jogos'">
+      <p>Jogos Cadastrados: {{ jog.length }}</p>
+      <ion-item-sliding *ngFor="let item of jog">
+
+        <button ion-item (click)="editJogos(item.id)">
+          <ion-thumbnail item-start>
+            <img src="{{ item.jog_foto }}">
+          </ion-thumbnail>
+          <h1>{{ item.jog_nome }}</h1>
+          <h2>{{ item.jog_desen }}</h2>
+          <h2>{{ item.jog_dist }}</h2>
+          <h2>{{ item.jog_duedate | date:'dd/MM/yyyy' }}</h2>
+          <h2>{{ item.plataforma_nome }}</h2>
+        </button>
+
+      </ion-item-sliding>
+    </ion-list>
+ 
+    <ion-list *ngSwitchCase="'acessorios'">
+      <p>Acessórios Cadastrados: {{ ace.length }}</p>
+      <ion-item-sliding *ngFor="let item of ace">
+
+        <button ion-item (click)="editAcessorio(item.id)">
+          <ion-thumbnail item-start>
+            <img src="{{ item.ace_fot }}">
+          </ion-thumbnail>
+          <h1>{{ item.ace_nome }}</h1>
+          <h2>{{ item.ace_fabri }}</h2>
+          <h2>{{ item.ace_duedate | date:'dd/MM/yyyy' }}</h2>
+          <h2>{{ item.plataforma_nome }}</h2>
+        </button>
+
+      </ion-item-sliding>
+    </ion-list>
+
+  </div>
 
 </ion-content>

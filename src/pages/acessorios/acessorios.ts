@@ -34,7 +34,7 @@ export class AcessoriosPage {
   editAcessorio(id: number) {
     this.navCtrl.push('EditAcessoriosPage', { id: id });
   }
-
+ 
   presentConfirm(acessorio: Cadace) {
     let alert = this.alertCtrl.create({
       title: 'Confirmar',
@@ -66,7 +66,15 @@ export class AcessoriosPage {
 
 }
 
-/*removeAcessorio(acessorio: Cadace) {
+/*
+<ion-buttons end>
+      <button class="list-options" ion-button outline color="light">
+        <ion-icon name="list">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
+removeAcessorio(acessorio: Cadace) {
     this.acessorioProvider.remove(acessorio.id)
       .then(() => {
         // Removendo do array de consoles

@@ -1,18 +1,18 @@
 <ion-header>
   <ion-navbar color='outracor'>
-    <ion-title>CADASTRAR CONSOLE </ion-title>
+    <ion-title>Cadastrar/Editar Console </ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 
-  <button ion-button small (click)="takePicture_gallery()">Add Imagem Galeria</button>
+  
   <br>
 
   <form padding [formGroup]="validCon" (submit)="valida()" novalidate>
 
-    <ion-img (click)="takePicture_gallery()" class="imagem" src="{{model.foto}}"></ion-img>
+    <ion-img style="width: 200px; height: 285px" (click)="takePicture_gallery()" class="imagem" src="{{model.con_foto}}"></ion-img>
     <br>
 
     <ion-list>
@@ -49,7 +49,7 @@
 
       <ion-item>
         <ion-label stacked>Descrição</ion-label>
-        <ion-input type="text" name="con_desc" [(ngModel)]="model.con_desc" formControlName="con_desc"></ion-input>
+        <ion-textarea rows="5" type="text" name="con_desc" [(ngModel)]="model.con_desc" formControlName="con_desc"></ion-textarea>
       </ion-item>
 
       <button ion-button block>Salvar</button>

@@ -11,8 +11,8 @@ export class AcessorioProvider {
   public insert(cadace: Cadace) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into acessorios (ace_nome, ace_fabri, ace_duedate, tipo_id, plataforma_id, ace_desc, foto) values (?, ?, ?, ?, ?, ?, ?)';
-        let data = [cadace.ace_nome, cadace.ace_fabri, cadace.ace_duedate, cadace.tipo_id, cadace.plataforma_id, cadace.ace_desc, cadace.foto];
+        let sql = 'insert into acessorios (ace_nome, ace_fabri, ace_duedate, tipo_id, plataforma_id, ace_desc, ace_fot) values (?, ?, ?, ?, ?, ?, ?)';
+        let data = [cadace.ace_nome, cadace.ace_fabri, cadace.ace_duedate, cadace.tipo_id, cadace.plataforma_id, cadace.ace_desc, cadace.ace_fot];
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
@@ -22,8 +22,8 @@ export class AcessorioProvider {
   public update(cadace: Cadace) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'update acessorios set ace_nome = ?, ace_fabri = ?, ace_duedate = ?, tipo_id = ?, plataforma_id = ?, ace_desc = ?, foto = ? where id = ?';
-        let data = [cadace.ace_nome, cadace.ace_fabri, cadace.ace_duedate, cadace.tipo_id, cadace.plataforma_id, cadace.ace_desc, cadace.foto, cadace.id];
+        let sql = 'update acessorios set ace_nome = ?, ace_fabri = ?, ace_duedate = ?, tipo_id = ?, plataforma_id = ?, ace_desc = ?, ace_fot = ? where id = ?';
+        let data = [cadace.ace_nome, cadace.ace_fabri, cadace.ace_duedate, cadace.tipo_id, cadace.plataforma_id, cadace.ace_desc, cadace.ace_fot, cadace.id];
  
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
@@ -61,7 +61,7 @@ export class AcessorioProvider {
               cadace.plataforma_id = item.plataforma_id;
               cadace.tipo_id = item.tipo_id;
               cadace.ace_desc = item.ace_desc;
-              cadace.foto = item.foto;
+              cadace.ace_fot = item.ace_fot;
               
               
  
@@ -114,7 +114,7 @@ export class Cadace {
   plataforma_id: number;
   tipo_id: number;
   ace_desc: string;
-  foto: string;
+  ace_fot: string;
 
 
 }

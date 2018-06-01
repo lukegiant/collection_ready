@@ -10,8 +10,8 @@ export class JogosProvider {
   public insert(cadjogo: Cadjogo) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into jogos (jog_nome, jog_desen, jog_dist, jog_duedate, plataforma_id, midia_id, versao_id, genero_id, regiao_id, foto) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id, cadjogo.foto];
+        let sql = 'insert into jogos (jog_nome, jog_desen, jog_dist, jog_duedate, plataforma_id, midia_id, versao_id, genero_id, regiao_id, jog_foto, jog_desc) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id, cadjogo.jog_foto, cadjogo.jog_desc];
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
@@ -21,8 +21,8 @@ export class JogosProvider {
   public update(cadjogo: Cadjogo) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'update jogos set jog_nome = ?, jog_desen = ?, jog_dist = ?, jog_duedate = ?, plataforma_id = ?, midia_id = ?, versao_id = ?, genero_id = ?, regiao_id = ?, foto = ? where id = ?';
-        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id, cadjogo.foto, cadjogo.id];
+        let sql = 'update jogos set jog_nome = ?, jog_desen = ?, jog_dist = ?, jog_duedate = ?, plataforma_id = ?, midia_id = ?, versao_id = ?, genero_id = ?, regiao_id = ?, jog_foto = ?, jog_desc = ? where id = ?';
+        let data = [cadjogo.jog_nome, cadjogo.jog_desen, cadjogo.jog_dist, cadjogo.jog_duedate, cadjogo.plataforma_id, cadjogo.midia_id, cadjogo.versao_id, cadjogo.genero_id, cadjogo.regiao_id, cadjogo.jog_foto, cadjogo.jog_desc, cadjogo.id];
 
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
@@ -63,7 +63,8 @@ export class JogosProvider {
               cadjogo.versao_id = item.versao_id;
               cadjogo.genero_id = item.genero_id;
               cadjogo.regiao_id = item.regiao_id;
-              cadjogo.foto = item.foto;
+              cadjogo.jog_foto = item.jog_foto;
+              cadjogo.jog_desc = item.jog_desc;
 
               return cadjogo;
             }
@@ -117,6 +118,7 @@ export class Cadjogo {
   versao_id: number;
   genero_id: number;
   regiao_id: number;
-  foto: string;
+  jog_foto: string;
+  jog_desc: string;
 }
 

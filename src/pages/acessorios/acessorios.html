@@ -2,12 +2,7 @@
 
   <ion-navbar color='verdeok'>
     <ion-title text-center>ACESSÓRIOS</ion-title>
-    <ion-buttons end>
-      <button class="list-options" ion-button outline color="light">
-        <ion-icon name="list">
-        </ion-icon>
-      </button>
-    </ion-buttons>
+    
   </ion-navbar>
 
 </ion-header>
@@ -21,7 +16,7 @@
 
       <button ion-item (click)="editAcessorio(acessorio.id)">
         <ion-thumbnail item-start>
-          <img src="{{ acessorio.foto }}">
+          <img src="{{ acessorio.ace_fot }}">
         </ion-thumbnail>
         <h1>{{ acessorio.ace_nome }}</h1>
         <h2>{{ acessorio.ace_fabri }}</h2>
@@ -34,6 +29,10 @@
           <ion-icon name="trash"></ion-icon>
           Excluir
         </button>
+        <button ion-button (click)="editAcessorio(acessorio.id)">
+            <ion-icon name="ios-create"></ion-icon>
+            Editar
+          </button>
       </ion-item-options>
 
     </ion-item-sliding>

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color='outracor'>
-    <ion-title>CADASTRAR JOGO </ion-title>
+    <ion-title>Cadastrar/Editar Jogo </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,12 +9,12 @@
 
 <ion-content padding>
 
-  <button ion-button small (click)="takePicture_gallery()">Add Imagem Galeria</button>
+  
   <br>
 
   <form padding [formGroup]="validJog" (submit)="valida()" novalidate>
 
-    <ion-img (click)="takePicture_gallery()" class="imagem" src="{{model.foto}}"></ion-img>
+    <ion-img style="width: 200px; height: 285px" (click)="takePicture_gallery()" class="imagem" src="{{model.jog_foto}}"></ion-img>
     <br>
 
     <ion-list class="formulario">
@@ -82,6 +82,11 @@
         <ion-select name="regiao_id" [(ngModel)]="model.regiao_id" formControlName="regiao_id">
           <ion-option *ngFor="let regioes of regiao" value="{{ regioes.id }}">{{ regioes.regiao_nome }}</ion-option>
         </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Descrição</ion-label>
+        <ion-textarea rows="5" type="text" name="jog_desc" [(ngModel)]="model.jog_desc" formControlName="jog_desc"></ion-textarea>
       </ion-item>
 
       <button ion-button block>Salvar</button>

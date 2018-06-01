@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>exibe_console</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item *ngFor="let item of conso">
+
+
+    <ion-thumbnail item-start>
+      <img src="{{ item.con_foto }}">
+    </ion-thumbnail>
+    <h1>{{ item.con_nome }}</h1>
+    <h2>{{ item.con_empre }}</h2>
+    <h2>{{ item.con_duedate | date:'dd/MM/yyyy' }}</h2>
+    <h2>{{ item.tipo_console_nome }}</h2>
+    <h2>{{ item.midia_id }}</h2>
+    <h2>{{ item.con_desc }}</h2>
+
+
+  </ion-item>
+
+</ion-content>

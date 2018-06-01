@@ -58,7 +58,15 @@ export class ConsolesPage {
     alert.present();
   }
 
-  /* removeConsole(console: Cadconsole) {
+  /* 
+  <ion-buttons end>
+      <button class="list-options" ion-button outline color="light">
+        <ion-icon name="list">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  
+  removeConsole(console: Cadconsole) {
      this.consoleProvider.remove(console.id)
        .then(() => {
          // Removendo do array de consoles
